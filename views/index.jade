@@ -5,7 +5,7 @@ block content
     each post, i in posts
       h1=post.title
       p.meta Posted in #{post.category} by #{post.author} on #{post.date}
-      =post.body
+      !=post.body
       a.more(href='/posts/show/#{post._id}') Read More
   else
     p.noposts There are no posts to display

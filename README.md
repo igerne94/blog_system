@@ -2,6 +2,8 @@
 
 [brew services start mongodb-community]
 
+mongosh
+
 use nodeblog
 switched to db nodeblog
 nodeblog> show dbs
@@ -59,3 +61,5 @@ nodeblog> db.posts.find().pretty()
     date: ISODate("2023-01-17T20:00:54.281Z")
   }
 ]
+
+npm install --save @ckeditor/ckeditor5-build-decoupled-document

@@ -6,19 +6,20 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-decoupled-document": "^35.4.0",
+    "connect-flash": "*",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "5.3.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-    "morgan": "~1.9.1",
-    "mongodb":"*",
+    "moment": "*",
+    "mongodb": "*",
     "monk": "*",
-    "connect-flash":"*",
-    "express-validator":"5.3.1",
-    "express-session":"*",
-    "express-messages":"*",
-    "multer":"*",
-    "moment":"*"
+    "morgan": "~1.9.1",
+    "multer": "*"
   }
 }
