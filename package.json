@@ -18,8 +18,11 @@
     "jade": "~1.11.0",
     "moment": "*",
     "mongodb": "*",
-    "monk": "*",
+    "mongoose": "^6.8.4",
+    "mongosh": "^1.6.2",
+    "monk": "^7.3.4",
     "morgan": "~1.9.1",
-    "multer": "*"
+    "multer": "*",
+    "serve-favicon": "^2.5.0"
   }
 }

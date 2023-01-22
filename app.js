@@ -6,6 +6,7 @@ var logger = require('morgan');
 var expressValidator = require('express-validator');
 var session = require('express-session');
 var mongo = require('mongodb');
+// const mongosh = require('mongosh');
 var db = require('monk')('localhost/nodeblog');
 var multer = require('multer');
 var flash = require('connect-flash');
@@ -18,18 +19,22 @@ var app = express();
 
 app.locals.moment = require('moment');
 
+app.locals.truncateText = function(text, length) {
+  var truncatedText = text.substring(0, length);
+  return truncatedText;
+}
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 //Handle files uploads and mulyipart data:
-app.use(multer({dest:__dirname + './public/images/uploads'}).any());//!fix with __dirname and .any()
+app.use(multer({ dest:__dirname + '/public/images/uploads'}).any());//!fix with __dirname and .any()
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 //! Handle Express Sessions:
 app.use(session({
@@ -56,6 +61,8 @@ app.use(expressValidator({
   }
 }));
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 //! connect flash
 app.use(flash());
 app.use(function (req, res, next) {
@@ -75,18 +82,43 @@ app.use('/categories', categoriesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+  // next(createError(404));
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// // error handler
+// app.use(function(err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+//   // render the error page
+//   res.status(err.status || 500);
+//   res.render('error');
+// });
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
 module.exports = app;
