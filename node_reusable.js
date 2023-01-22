@@ -26,6 +26,7 @@ app.use(expressValidator({
 //connect flash
 app.use(flash());
 app.use(function (req, res, next) {
+  //create a global variable by ".locals"
   res.locals.messages = require('express-messages')(req, res);
   next();
 });

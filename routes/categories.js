@@ -23,9 +23,9 @@ router.get('/add', function(req, res, next) {
 
 router.post("/add", function (req, res, next) {
   // Get Form values:
-  var title = req.body.title;
+  var title = req.body.title; // grab data from a submitted form:
 
-  // Form Validation
+  // Form Validation to check values submitted by a form
   req.checkBody("title", "Title field is required").notEmpty();
 
   // Check Errors

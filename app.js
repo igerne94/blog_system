@@ -17,8 +17,10 @@ var categoriesRouter = require('./routes/categories');
 
 var app = express();
 
+//create a global variable by ".locals"
 app.locals.moment = require('moment');
 
+//create a global variable by ".locals"
 app.locals.truncateText = function(text, length) {
   var truncatedText = text.substring(0, length);
   return truncatedText;
@@ -66,6 +68,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //! connect flash
 app.use(flash());
 app.use(function (req, res, next) {
+  //create a global variable by ".locals"
   res.locals.messages = require('express-messages')(req, res);
   next();
 });

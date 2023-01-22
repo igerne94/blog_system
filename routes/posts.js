@@ -27,11 +27,11 @@ router.get("/add", function (req, res, next) {
 
 router.post("/add", function (req, res, next) {
   // Get Form values:
-  var title = req.body.title;
-  var category = req.body.category;
-  var body = req.body.body;
-  var author = req.body.author;
-  var date = new Date();
+  var title = req.body.title; // grab data from a submitted form:
+  var category = req.body.category; // grab data from a submitted form:
+  var body = req.body.body; // grab data from a submitted form:
+  var author = req.body.author; // grab data from a submitted form:
+  var date = new Date(); // grab data from a submitted form:
   let filename;
 
   if (req.files[0].filename) {
@@ -47,7 +47,7 @@ router.post("/add", function (req, res, next) {
     filename = "noimage.png";
   }
 
-  // Form Validation
+  // Form Validation to check values submitted by a form
   req.checkBody("title", "Title field is required").notEmpty();
   req.checkBody("body", "Body field is required");
 
@@ -89,13 +89,13 @@ router.post("/add", function (req, res, next) {
 
 router.post("/addcomment", function (req, res, next) {
   // Get Form values:
-  var name = req.body.name;
-  var email = req.body.email;
-  var body = req.body.body;
-  var postid = req.body.postid;
-  var commentdate = new Date();
+  var name = req.body.name; // grab data from a submitted form:
+  var email = req.body.email; // grab data from a submitted form:
+  var body = req.body.body; // grab data from a submitted form:
+  var postid = req.body.postid; // grab data from a submitted form:
+  var commentdate = new Date(); // grab data from a submitted form:
 
-  // Form Validation
+  // Form Validation to check values submitted by a form
   req.checkBody("name", "Name field is required").notEmpty();
   req.checkBody("email", "Email field is required").notEmpty();
   req.checkBody("email", "Email field is not formatted correctly").isEmail();
