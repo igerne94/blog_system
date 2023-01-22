@@ -32,16 +32,19 @@ router.post("/add", function (req, res, next) {
   var body = req.body.body;
   var author = req.body.author;
   var date = new Date();
+  let filename;
 
-  if (req.files.mainimage) {
-    var mainImageOriginalName = req.files.mainimage.originalname;
-    var mainImageName = req.files.mainimage.name;
-    var mainImageMime = req.files.mainimage.mimetype;
-    var mainImagePath = req.files.mainimage.path;
-    var mainImageExt = req.files.mainimage.extension;
-    var mainImageSize = req.files.mainimage.size;
+  if (req.files[0].filename) {
+    filename = req.files[0].filename;
+    var fieldname = req.files[0].fieldname;
+    var originalname = req.files[0].originalname;
+    var encoding = req.files[0].encoding;
+    var mimetype = req.files[0].mimetype;
+    var destination = req.files[0].destination;
+    var path = req.files[0].path;
+    var size = req.files[0].size;
   } else {
-    var mainImageName = "noimage.png";
+    filename = "noimage.png";
   }
 
   // Form Validation
@@ -69,7 +72,7 @@ router.post("/add", function (req, res, next) {
         "category": category,
         "date": date,
         "author": author,
-        "mainimage": mainImageName,
+        "filename": filename,
       },
       function (err, post) {
         if (err) {
